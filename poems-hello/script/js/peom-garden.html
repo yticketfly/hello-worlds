@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<head>
+<style>
+
+h1 {
+    color: orange;
+    text-align: center;
+}
+
+h2, button {
+    text-align: center;
+    font-family: "Times New Roman";
+    font-size: 20px;
+}
+
+.submitbutton {
+     display:block; /* change this from inline-block */
+    width:10%; /* setting the width */
+    margin:0 auto; /* this will center  it */
+    position:relative;
+    font-style:normal;
+    font-weight:normal;
+    font-family:"Open Sans";
+    font-size:14px;
+    outline:none;
+    color:#fff;
+    border:none;
+    text-decoration:none;
+    text-align:center;
+    cursor:pointer;
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+    background-color:#96aa39;
+    border-bottom:1px solid #7b8b2f;
+}
+</style>
+</head>
+
+
+<body onload="clearChoice()">
+
+<h1>花园诗文</h1>
+
+<h2 id="question"></h2>
+
+<script>
+var dataAll = 
+[ ['青青园中葵','朝露待日晞'],
+['阳春布德泽','万物生光辉'],
+['常恐秋节至','焜黄华叶衰'],
+['百川东到海','何时复西归'],
+['少壮不努力','老大徒伤悲'],
+['敕勒川','阴山下'],
+['天似穹庐','笼盖四野'],
+['天苍苍','野茫茫','风吹草低见牛羊'],
+['鹅－鹅－鹅','曲项向天歌'],
+['白毛浮绿水','红掌拨清波'],
+['少小离家老大回','乡音无改鬓毛衰'],
+['儿童想见不相识','笑问客从何处来'],
+['碧玉妆成一树高','万条垂下绿丝绦'],
+['不知细叶谁裁出','二月春风似剪刀'],
+['黄河远上白云间','一片孤城万仞山'],
+['羌笛何须怨杨柳','春风不度玉门关'],
+['白日依山尽','黄河入海流'],
+['欲穷千里目','更上一层楼'],
+['春眠不觉晓','处处闻啼鸟'],
+['夜来风雨声','花落知多少'],
+['移舟泊烟渚','日暮客愁新'],
+['野旷天低树','江清月近人'],
+['葡萄美酒夜光杯','欲饮琵琶马上催'],
+['醉卧沙场君莫笑','古来征战几人回'],
+['秦时明月汉时关','万里长征人未还'],
+['但使龙城飞将在','不教胡马度阴山'],
+['青海长云暗雪山','孤城遥望玉门关'],
+['黄沙百战穿金甲','不破楼兰终不还'],
+['寒雨连江夜入吴','平明送客楚山孤'],
+['洛阳亲友如相问','一片冰心在玉壶'],
+['空山不见人','但闻人语响'],
+['返景入深林','复照青苔上'],
+['独坐幽篁(huáng)里','弹琴复长啸'],
+['深林人不知','明月来相照'],
+['渭城朝雨浥轻尘','客舍青青柳色新'],
+['劝君更尽一杯酒','西出阳关无故人'],
+['独在异乡为异客','每逢佳节倍思亲'],
+['遥知兄弟登高处','遍插茱萸少一人'],
+['千里黄云白日曛','北风吹雁雪纷纷'],
+['莫愁前路无知已','天下谁人不识君'],
+['床前明月光','疑是地上霜'],
+['举头望明月','低头思故乡'],
+['小时不识月','呼作白玉盘'],
+['又疑瑶台镜','飞在青云端'],
+['仙人垂两足','桂树何团团'],
+['白兔捣药成','问言与谁餐'],
+['日照香炉生紫烟','遥看瀑布挂前川'],
+['飞流直下三千尽','疑是银河落九天'],
+['李白乘舟将欲行','忽闻岸上踏歌声'],
+['桃花潭水深千尺','不及汪伦送我情'],
+['众鸟高飞尽','孤云独去闲'],
+['相看两不厌','只有敬亭山'],
+['故人西辞黄鹤楼','烟花三月下扬州'],
+['孤帆远影碧空尽','惟见长江天际流'],
+['朝辞白帝彩云间','千里江陵一日还'],
+['两岸猿声啼不住','轻舟已过万重山'],
+['白发三千丈','缘愁似个长'],
+['不知明镜里','何处得秋霜'],
+['天门中断楚江开','碧水东流至此回'],
+['两岸青山相对出','孤帆一片日边来'],
+['剑外忽传收蓟北','初闻涕泪满衣裳'],
+['却看妻子愁何在','漫卷诗书喜欲狂'],
+['白日放歌须纵酒','青春作伴好还乡'],
+['即从巴峡穿巫峡','便下襄阳向洛阳'],
+['两个黄鹂鸣翠柳','一行白鹭上青天'],
+['窗含西岭千秋雪','门泊东吴万里船'],
+['锦城丝管日纷纷','半入江风半入云'],
+['此曲只应天上有','人间能得几回闻'],
+['岐王宅里寻常见','崔九堂前几度闻'],
+['正是江南好风景','落花时节又逢君'],
+['好雨知时节','当春乃发生'],
+['随风潜入夜','润物细无声'],
+['野径云俱黑','江船火独明'],
+['晓看红湿处','花重锦官城'],
+['迟日江山丽','春风花草香'],
+['泥融飞燕子','沙暖睡鸳鸯'],
+['黄四娘家花满蹊','千朵万朵压枝低'],
+['留连戏蝶时时舞','自在娇莺恰恰啼'],
+['日暮苍山远','天寒白屋贫'],
+['柴门闻犬吠','风雪夜归人'],
+['千山鸟飞绝','万径人踪灭'],
+['孤舟蓑笠翁','独钓寒江雪'],
+['松下问童子','言师采药去'],
+['只在此山中','云深不知处'],
+['月落乌啼霜满天','江枫渔火对愁眠'],
+['姑苏城外寒山寺','夜半钟声到客船'],
+['西塞山前白鹭飞','桃花流水鳜鱼肥'],
+['青箬笠','绿蓑衣','斜风细雨不须归'],
+['春城无处不飞花','寒食东风御柳斜'],
+['日暮汉宫传蜡烛','轻烟散入五侯家'],
+['独怜幽草涧边生','上有黄鹂深树鸣'],
+['春潮带雨晚来急','野渡无人舟自横'],
+['林暗草惊风','将军夜引弓'],
+['平明寻白羽','没在石棱中'],
+['慈母手中线','游子身上衣'],
+['临行密密逢','意恐迟迟归'],
+['谁言寸草心','报得三春晖'],
+['杨柳青青江水平','闻郎江上唱歌声'],
+['东边日出西边雨','道是无晴却有晴'],
+['朱雀桥边野草花','乌衣巷口夕阳斜'],
+['旧时王谢堂前燕','飞入寻常百姓家'],
+['湖光秋月两相和','潭面无风镜未磨'],
+['遥望洞庭山水翠','白银盘里一青螺'],
+['九曲黄河万里沙','浪陶风簸自天涯'],
+['如今直上银河去','同到牵牛织女家'],
+['离离原上草','一岁一枯荣'],
+['野火烧不尽','春风吹又生'],
+['远芳侵古道','晴翠接荒城'],
+['又送王孙去','萋萋满别情'],
+['江南好','风景旧曾谙'],
+['日出江花红胜火','春为江水绿如蓝','能不忆江南'],
+['春种一粒粟','秋收万颗子'],
+['四海无闲田','农夫犹饿死'],
+['锄禾日当午','汗低禾下土'],
+['谁知盘中餐','粒粒皆辛苦'],
+['远上寒山石径斜','白云深处有人家'],
+['停车坐爱枫林晚','霜叶红于二月花'],
+['清明时节雨纷纷','路上行人欲断魂'],
+['借问酒家何处有','牧童遥指杏花村'],
+['千里莺啼绿映红','水村山郭酒旗风'],
+['南朝四百八十寺','多少楼台烟雨中'],
+['银烛秋光冷画屏','轻罗小扇扑流莹'],
+['天阶夜色凉如水','坐看牵牛织女星'],
+['向晚意不适','驱车登古原'],
+['夕阳无限好','只是近黄昏'],
+['晨起动征铎','客行悲故乡'],
+['鸡声茅店月','人迹板桥霜'],
+['槲叶落山路','枳花明驿墙'],
+['因思杜陵梦','凫雁满回塘'],
+['爆竹声中一岁除','春风送暖入屠苏'],
+['千门万户曈曈日','总把新桃换旧符'],
+['京口瓜洲一水间','钟山只隔数重山'],
+['春风又绿江南岸','明月何时照我还'],
+['墙角数枝梅','凌寒独自开'],
+['遥知不是雪','为有暗香来'],
+['黑云翻墨未遮山','白雨跳珠乱入船'],
+['卷地风来忽吹散','望湖楼下水如天'],
+['水光潋滟晴方好','山色空蒙雨亦奇'],
+['欲把西湖比西子','淡妆浓抹总相宜'],
+['竹外桃花三两枝','春江水暖鸭先知'],
+['蒌蒿满地芦芽短','正是河豚欲上时'],
+['横看成岭侧成峰','远近高低各不同'],
+['不识庐山真面目','只缘生在此山中'],
+['生当作人杰','死亦为鬼雄'],
+['至今思项羽','不肯过江东'],
+['死去原知万事空','但悲不见九州同'],
+['王师北定中原日','家祭毋忘告乃翁'],
+['三万里河东入海','五千仞岳山摩天'],
+['遗民泪尽胡尘里','南望王师又一年'],
+['泉眼无声惜细流','树阴照水爱晴柔'],
+['小荷才露尖尖角','早有蜻蜓立上头'],
+['毕竟西湖六月中','风光不与四时同'],
+['接天莲叶无穷碧','映日荷花别样红'],
+['昼出耘田夜绩麻','村庄儿女各当家'],
+['童孙未解供耕织','也傍桑阴学种瓜'],
+['胜日寻芳泗水滨','无边光景一时新'],
+['等闲识得东风面','万紫千红总是春'],
+['郁孤台下清江水','中间多少行人泪'],
+['西北望长安','可怜无数山'],
+['青山遮不住','毕竟东流去'],
+['江晚正愁余','山深闻鹧鸪'],
+['山外青山楼外楼','西湖歌舞几时休'],
+['暖风熏得游人醉','直把杭州作汴州'],
+['应怜屐齿印苍苔','小扣柴扉久不开'],
+['春色满园关不住','一枝红杏出墙来'],
+['我家洗砚池头树','个个花开淡墨痕'],
+['不要人夸颜色好','只留清气满乾坤'],
+['千锤万凿出深山','烈火焚烧若等闲'],
+['粉骨碎身浑不怕','要留清白在人间'],
+['喇叭','唢呐','曲儿小','腔儿大','官船来往乱如麻','全仗你抬身价'],
+['军听了军愁','民听了民怕','哪里去辨什么真共假'],
+['眼见的吹翻了这家','吹伤了那家','只吹的水尽鹅飞罢'],
+['咬定青山不放松','立根原在破岩中'],
+['千磨万击还坚劲','任我东西南北风'],
+['九州生气恃风雷','万马齐喑究可哀 '],
+['我劝天公重抖擞','不拘一格降人才'] ];
+
+function verseCategoryCheck(metre, guess) {
+  if (metre.length != 2) {
+    return false
+  }
+  return metre[0].length == guess && metre[1].length == guess
+}
+
+var data5 = dataAll.filter(function (metre) {
+  return verseCategoryCheck(metre, 5)
+});
+var data7 = dataAll.filter(function (metre) {
+  return verseCategoryCheck(metre, 7)
+});
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+function randomDataSet() {
+  if (getRandomInt(0,2) == 1) {
+    return data7
+  } else {
+    return data5
+  }
+}
+
+var data = randomDataSet()
+var rightCount = 0
+var wrongCount = 0
+// http://www.kirupa.com/html5/shuffling_array_js.htm
+Array.prototype.shuffle = function() {
+    var input = this;
+     
+    for (var i = input.length-1; i >=0; i--) {
+     
+        var randomIndex = Math.floor(Math.random()*(i+1)); 
+        var itemAtIndex = input[randomIndex]; 
+         
+        input[randomIndex] = input[i]; 
+        input[i] = itemAtIndex;
+    }
+    return input;
+}
+
+// http://stackoverflow.com/questions/1408289/how-can-i-do-string-interpolation-in-javascript
+String.prototype.supplant = function (o) {
+    return this.replace(/{([^{}]*)}/g,
+        function (a, b) {
+            var r = o[b];
+            return typeof r === 'string' || typeof r === 'number' ? r : a;
+        }
+    );
+};
+
+
+function getRandomIntArray(min, max, count, preset) {
+  var arr = new Set([preset])
+  while(arr.size < count){
+    var randomnumber = getRandomInt(min, max)
+    arr.add(randomnumber)
+  }
+  return [...arr].shuffle()
+}
+
+var choiceIndex = ["甲  - ", "乙  - ", "丙  - ", "丁  - "]
+
+// --------------------------------------------------------------------------
+function genChallenge(data) {
+  lineNumber = getRandomInt(0, data.length)
+  var pickedLine = data[lineNumber].slice(0)
+  posToMask = getRandomInt(0, pickedLine.length)
+  pickedLine[posToMask] = " __ ".repeat(pickedLine[posToMask].length)
+  return pickedLine
+}
+
+function genChoices(data) {
+  var choices = []
+  var chCount = choiceIndex.length
+  var totalNumber = data.length;
+
+  var index = getRandomIntArray(0, totalNumber, chCount, lineNumber)
+  for (i = 0; i < chCount; i++) {
+    if (index[i] == lineNumber) {
+      correctIndex = i
+      var line = data[lineNumber].slice(0)[posToMask]
+      choices.push(choiceIndex[i] + line)
+    } else {
+      var lNum = getRandomInt(0, totalNumber)
+      var pLine = data[lNum].slice(0)
+      var pos = getRandomInt(0, pLine.length)
+      var line = pLine[pos]
+      choices.push(choiceIndex[i] + line)
+    }
+  }
+  return choices
+}
+
+function renderNextQuestion() {
+  clearChoice()
+  data = randomDataSet()
+  var chall = genChallenge(data)
+  var choi = genChoices(data)
+  return chall + "<br><br>" + choi.toString().replace(/,/g,"<br>")
+};
+document.getElementById('question').innerHTML = renderNextQuestion()
+
+function rendererChoices() {
+  var choices = genChoices(data)
+  for (i = 0; i < choices.length; i++) {
+    var b = document.getElementById(i)
+    b.checked = false
+    b.nextSibling.textContent = choices[i]
+  }
+  return
+}
+
+function clearChoice() {
+  for (i = 0; i < 4; i++) {
+    var b = document.getElementById(i)
+    if (!b) return
+    b.checked = false
+  }
+
+  document.getElementById("submitanswer").disabled = false
+  document.getElementById("submitanswer").style.background = "#96aa39"
+  return
+}
+
+function alterTextTemp(elementId, tempText) {
+  var ele = document.getElementById(elementId)
+  var oldText = ele.textContent
+  var oldColor = ele.style.color
+  ele.textContent = tempText
+  ele.style.color = "red"
+  setTimeout(function() {
+    ele.textContent = oldText
+    ele.style.color = oldColor
+  }, 1000);
+  return
+}
+
+function checkanswer() {
+  if ( document.getElementById(correctIndex).checked == true) {
+    rightCount += 1
+    document.getElementById("rightanswer").textContent = rightCount
+    alterTextTemp("submitanswer", "很好很好！")
+    document.getElementById("submitanswer").disabled = true
+    document.getElementById("submitanswer").style.background = "gray"
+    console.log("good")
+  } else {
+    wrongCount += 1
+    document.getElementById("wronganswer").textContent = wrongCount
+    alterTextTemp("submitanswer", "不对不对！")
+    console.log("bad")
+  }
+  return
+}
+</script>
+
+<script>
+var answerPrompt = "看答案"
+
+
+function mouseOver() {
+    document.getElementById("peekanswer").style.color = "red";
+    document.getElementById("peekanswer").innerHTML = data[lineNumber].slice(0)[posToMask];
+}
+
+function mouseOut() {
+    document.getElementById("peekanswer").style.color = "black";
+    document.getElementById("peekanswer").innerHTML = answerPrompt;
+}
+</script>
+
+<div align="center">
+
+<form action="" id="radioform">
+  <input type="radio" name="poemline" value="aaa" id="0">甲<br>
+  <input type="radio" name="poemline" value="bbb" id="1">乙<br>
+  <input type="radio" name="poemline" value="ccc" id="2">丙<br>
+  <input type="radio" name="poemline" value="ddd" id="3">丁<br>
+<br>
+<button class="submitbutton" id="submitanswer" type="button" onclick="checkanswer()">回答</button>
+</form>
+</div>
+
+<br>
+<button class="submitbutton" id="nextquestion" type="button" onclick="document.getElementById('question').innerHTML = renderNextQuestion()">下一个</button>
+
+
+
+<br><br>
+正确次数
+<h3 id="rightanswer">0</h1>
+<br><br>
+错误次数
+<h3 id="wronganswer">0</h1>
+<br><br>
+<h3 id="peekanswer" onmouseover="mouseOver()" onmouseout="mouseOut()">看答案</h1>
+
+</body>
+</html> 
