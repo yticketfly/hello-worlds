@@ -10,3 +10,5 @@ lazy val root = (project in file(".")).
 Seq(ThriftPlugin.thriftSettings: _*)
 
 libraryDependencies += "org.apache.thrift" % "libthrift" % "0.9.2"
+
+libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.5.8"
