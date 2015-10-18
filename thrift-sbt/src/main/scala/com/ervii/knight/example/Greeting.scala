@@ -1,6 +1,6 @@
 package com.ervii.knight.example
 
-import com.ervii.knight.primitives.thriftjava._
+import com.ervii.knight.primitives.thriftjava.Latlon
 
 object Greeting extends App{
 
