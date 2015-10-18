@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-# thrift --gen py thrift-sbt/src/main/thrift/wellservice.thrift
+# sudo easy_install thrift==0.9.2
+# cd thrift-sbt/src/main/python/ && thrift --gen py ../thrift/wellservice.thrift
 # http://themayesfamily.com/blogs/b/2013/01/how-to-get-a-python-thrift-client-running-on-mac-os/
 import sys
 sys.path.append('./gen-py')
